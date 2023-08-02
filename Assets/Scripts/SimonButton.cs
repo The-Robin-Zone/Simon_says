@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class SimonButton : MonoBehaviour
 {
-    public AudioSource buttonAudio;
-    public ButtonColor buttonColor;
+    [SerializeField] AudioSource buttonAudio;
+    [SerializeField] ButtonColor buttonColor;
 
-    void Start()
+    public ButtonColor GetColor()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        return buttonColor;
     }
 
     public void PressButton()
     {
         buttonAudio.Play();
     }
+
 }
