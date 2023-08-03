@@ -1,23 +1,40 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StartGame : MonoBehaviour
 {
+    [SerializeField] GameObject gameOverMenuObj;
+    [SerializeField] GameObject PointsObj;
+
     private Queue<ButtonColor> roundColors;
     private Queue<ButtonColor> roundColorsTurnCheck;
     private ButtonPresser buttonpresser;
+    private TextMeshProUGUI PointsText;
     private int RoundNumber = 1;
     private float pressGapTime = 0.3f;
     private float roundDelay = 2f;
     private bool playersTurn = true;
+    private int Points = 0;
+
+    // Timer
+    [SerializeField] GameObject timerMeterObj;
+    private Image timerMeter;
+    private float maxTime = 30f;
+    private float timeRemaining;
+    private bool roundStarted = false;
 
     void Start()
     {
         buttonpresser = this.gameObject.GetComponent<ButtonPresser>();
         roundColors = new Queue<ButtonColor>();
         roundColorsTurnCheck = new Queue<ButtonColor>();
+        timerMeter = timerMeterObj.GetComponent<Image>();
+        PointsText = PointsObj.GetComponent<TextMeshProUGUI>();
+        timeRemaining = maxTime;
 
         // Subscribe to the OnButtonPress event for every button
         foreach (KeyValuePair<ButtonColor, SimonButton> kvp in buttonpresser.ColorToButtonScriptDictionary)
@@ -26,12 +43,31 @@ public class StartGame : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (roundStarted == true)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                timerMeter.fillAmount = timeRemaining / maxTime;
+            }
+            else
+            {
+                GameOver();
+            }
+        }
+
+    }
+
     public void StartRound()
     {
+        roundStarted = true;
+
         // Add new color to queue
         roundColors.Enqueue(RandomColor());
 
-        // Copy queue to check input without destroying original
+        // Copy queue to check input without destroying the original
         roundColorsTurnCheck.Clear();
         roundColorsTurnCheck = new Queue<ButtonColor>(roundColors);
 
@@ -68,15 +104,17 @@ public class StartGame : MonoBehaviour
                 roundColorsTurnCheck.Dequeue();
                 Debug.Log("Successful press");
 
+                // Finished round succesfully
                 if (roundColorsTurnCheck.Count == 0)
                 {
-                    StartCoroutine(StartRoundWithDelay());
-                    Debug.Log("Successful round");
+                    Points++;
+                    PointsText.text = Points.ToString();
+                    StartCoroutine(StartRoundWithDelay()); 
                 }
             }
             else
             {
-                Debug.Log("You lose - need to restart");
+                GameOver();
             }
         }
         else
@@ -90,5 +128,12 @@ public class StartGame : MonoBehaviour
     {
         yield return new WaitForSeconds(roundDelay);  // Wait for 'roundDelay' seconds
         StartRound();
+    }
+
+    private void GameOver()
+    {
+        StopAllCoroutines();
+        buttonpresser.ButtonsDisabler();
+        gameOverMenuObj.SetActive(true);
     }
 }
