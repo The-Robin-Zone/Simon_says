@@ -9,7 +9,7 @@ public class ButtonPresser : MonoBehaviour
 {
     private GameObject[] buttonsObjArray; 
     private Dictionary<ButtonColor, Button> ColorToButtonDictionary;
-    private Dictionary<ButtonColor, SimonButton> ColorToButtonScriptDictionary;
+    public Dictionary<ButtonColor, SimonButton> ColorToButtonScriptDictionary;
     private float pressTime = 0.15f;
 
     void Start()
@@ -23,12 +23,12 @@ public class ButtonPresser : MonoBehaviour
 
         for (int i = 0; i < buttonsObjArray.Length; i++)
         {
-            ButtonColor currcolor = buttonsObjArray[i].GetComponent<SimonButton>().GetColor();
-            Button currbutton = buttonsObjArray[i].GetComponent<Button>();
-            SimonButton currscript = buttonsObjArray[i].GetComponent<SimonButton>();
+            ButtonColor currColor = buttonsObjArray[i].GetComponent<SimonButton>().GetColor();
+            Button currButton = buttonsObjArray[i].GetComponent<Button>();
+            SimonButton currScript = buttonsObjArray[i].GetComponent<SimonButton>();
 
-            ColorToButtonDictionary.Add(currcolor, currbutton);
-            ColorToButtonScriptDictionary.Add(currcolor, currscript);
+            ColorToButtonDictionary.Add(currColor, currButton);
+            ColorToButtonScriptDictionary.Add(currColor, currScript);
         }
     }
 
@@ -37,7 +37,7 @@ public class ButtonPresser : MonoBehaviour
         if (ColorToButtonDictionary.ContainsKey(color) && ColorToButtonScriptDictionary.ContainsKey(color))
         {
             PressButtonVisual(color);                            // simulate the visual press
-            ColorToButtonScriptDictionary[color].PressButton();  // trigger the SimonButton method
+            ColorToButtonScriptDictionary[color].ButtonSound();  // trigger the SimonButton method for sound
         }
         else
         {
@@ -67,5 +67,21 @@ public class ButtonPresser : MonoBehaviour
 
         // Set the release
         ExecuteEvents.Execute(ColorToButtonDictionary[color].gameObject, pointer, ExecuteEvents.pointerUpHandler);
+    }
+
+    public void ButtonsDisabler()
+    {
+        foreach (KeyValuePair<ButtonColor, Button> kvp in ColorToButtonDictionary)
+        {
+            kvp.Value.interactable = false;
+        }
+    }
+
+    public void ButtonsEnabler()
+    {
+        foreach (KeyValuePair<ButtonColor, Button> kvp in ColorToButtonDictionary)
+        {
+            kvp.Value.interactable = true;
+        }
     }
 }
