@@ -1,23 +1,26 @@
-<GameConfiguration>
-  <Level name="Easy">
+<DifficultyList>
+  <Difficulty>
+    <Mode>Easy</Mode>
     <GameButtons>4</GameButtons>
     <PointsEachStep>1</PointsEachStep>
     <GameTime>50</GameTime>
     <RepeatMode>true</RepeatMode>
     <GameSpeed>1</GameSpeed>
-  </Level>
-  <Level name="Medium">
+  </Difficulty>
+  <Difficulty>
+    <Mode>Medium</Mode>
     <GameButtons>5</GameButtons>
     <PointsEachStep>2</PointsEachStep>
     <GameTime>45</GameTime>
     <RepeatMode>true</RepeatMode>
     <GameSpeed>1.25</GameSpeed>
-  </Level>
-  <Level name="Hard">
+  </Difficulty>
+  <Difficulty>
+    <Mode>Hard</Mode>
     <GameButtons>6</GameButtons>
     <PointsEachStep>3</PointsEachStep>
     <GameTime>30</GameTime>
     <RepeatMode>false</RepeatMode>
     <GameSpeed>1.5</GameSpeed>
-  </Level>
-</GameConfiguration>
+  </Difficulty>
+</DifficultyList>

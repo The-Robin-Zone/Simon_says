@@ -1,28 +1,30 @@
 {
-    "Difficulty": [
-        {
-            "Mode": "Easy",
-            "gameButtons": 4,
-            "pointsEachStep": 1,
-            "gameTime": 50,
-            "repeatMode": true,
-            "gameSpeed": 1
-        },
-        {
-            "Mode": "Medium",
-            "gameButtons": 5,
-            "pointsEachStep": 2,
-            "gameTime": 45,
-            "repeatMode": true,
-            "gameSpeed": 1.25
-        },
-        {
-            "Mode": "Hard",
-            "gameButtons": 6,
-            "pointsEachStep": 3,
-            "gameTime": 30,
-            "repeatMode": false,
-            "gameSpeed": 1.5
-        }
-    ]
+    "DifficultyList": {
+        "Difficulty": [
+            {
+                "Mode": "Easy",
+                "GameButtons": 4,
+                "PointsEachStep": 1,
+                "GameTime": 50,
+                "RepeatMode": true,
+                "GameSpeed": 1
+            },
+            {
+                "Mode": "Medium",
+                "GameButtons": 5,
+                "PointsEachStep": 2,
+                "GameTime": 45,
+                "RepeatMode": true,
+                "GameSpeed": 1.25
+            },
+            {
+                "Mode": "Hard",
+                "GameButtons": 6,
+                "PointsEachStep": 3,
+                "GameTime": 30,
+                "RepeatMode": false,
+                "GameSpeed": 1.5
+            }
+        ]
+    }
 }

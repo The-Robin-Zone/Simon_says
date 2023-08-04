@@ -1,15 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Xml.Serialization;
 
 [System.Serializable]
 public class GameDifficultyList
 {
-    [SerializeField] private List<GameDifficulty> Difficulty;
+    [XmlElement("Difficulty")]
+    public List<GameDifficulty> Difficulty;
+}
 
-    public List<GameDifficulty> GetDifficulty()
-    {
-        return Difficulty;
-    }
+[System.Serializable]
+public class Wrapper
+{
+    public GameDifficultyList DifficultyList;
 }
 

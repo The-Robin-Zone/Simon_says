@@ -12,7 +12,7 @@ public class ButtonPresser : MonoBehaviour
     public Dictionary<ButtonColor, SimonButton> ColorToButtonScriptDictionary;
     private float pressTime = 0.15f;
 
-    void Start()
+    public void ButtonPresserInit()
     {
         // initialize and assign buttonsObjArray
         buttonsObjArray = GameObject.FindGameObjectsWithTag("SimonButton");

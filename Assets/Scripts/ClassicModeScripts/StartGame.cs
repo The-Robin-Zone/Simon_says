@@ -19,10 +19,11 @@ public class StartGame : MonoBehaviour
     private ButtonPresser buttonpresser;
     private TextMeshProUGUI PointsText;
     private int RoundNumber = 1;
-    private float pressGapTime = 0.3f;
-    private float roundDelay = 2f;
+    private float pressGapTime = 0.2f;
+    private float roundDelay = 1f;
     private bool playersTurn = true;
     private int currentPoints = 0;
+    private bool initButtonPresser = false;
 
     // Game difficulty paramaters
     private int gameButtons;
@@ -37,7 +38,7 @@ public class StartGame : MonoBehaviour
     private float timeRemaining;
     private bool roundStarted = false;
 
-    void Start()
+    void Awake()
     {
         configReader = GameObject.FindGameObjectWithTag("ConfigReader");
         configReaderScript = configReader.GetComponent<ConfigReader>();
@@ -49,15 +50,18 @@ public class StartGame : MonoBehaviour
         
         AssignDifficultyParameters();
         timeRemaining = gameTime;
+        pressGapTime = pressGapTime * (1 / gameSpeed);
 
-        // Subscribe to the OnButtonPress event for every button
+        //DEBUGING
+        Debug.Log("pressGapTime is:" + pressGapTime);
+    }
+
+    private void SubscribeToButtonPressEvent()
+    {
         foreach (KeyValuePair<ButtonColor, SimonButton> kvp in buttonpresser.ColorToButtonScriptDictionary)
         {
             kvp.Value.OnButtonPress += ButtonPressed;
         }
-
-        //DEBUGING
-        //Debug.Log("Game time is:" + gameTime);
     }
 
     private void Update()
@@ -81,39 +85,59 @@ public class StartGame : MonoBehaviour
     {
         roundStarted = true;
 
+        if (!initButtonPresser)
+        {
+            buttonpresser.ButtonPresserInit();
+            SubscribeToButtonPressEvent();
+            initButtonPresser = true;
+        }
+
+
         // Add new color to queue
-        roundColors.Enqueue(RandomColor());
+        ButtonColor randomColor = RandomColor(gameButtons);
+        roundColors.Enqueue(randomColor);
 
         // Copy queue to check input without destroying the original
         roundColorsTurnCheck.Clear();
         roundColorsTurnCheck = new Queue<ButtonColor>(roundColors);
 
         // Start button routine
-        StartCoroutine(RunSequence());
+        StartCoroutine(RunSequence(randomColor));
         RoundNumber++;
     }
 
-    private IEnumerator RunSequence()
+    private IEnumerator RunSequence(ButtonColor randomColor)
     {
         playersTurn = false;
-        foreach (ButtonColor variableName in roundColors)
+        if (reaperMode)
         {
-            buttonpresser.pressSimonButton(variableName);
-            yield return new WaitForSeconds(pressGapTime);
+            foreach (ButtonColor variableName in roundColors)
+            {
+                buttonpresser.pressSimonButton(variableName);
+                yield return new WaitForSeconds(pressGapTime);
+            }
         }
+        else
+        {
+            buttonpresser.pressSimonButton(randomColor);
+        }
+
         playersTurn = true;
     }
 
-    private ButtonColor RandomColor()
+    private ButtonColor RandomColor(int gameButtons)
     {
-        Array values = Enum.GetValues(typeof(ButtonColor));
-        return (ButtonColor)values.GetValue(new System.Random().Next(values.Length));
+        if (gameButtons < 1 || gameButtons > Enum.GetNames(typeof(ButtonColor)).Length)
+        {
+            throw new ArgumentOutOfRangeException("Invalid gameButtons");
+        }
+
+        ButtonColor[] colors = (ButtonColor[])Enum.GetValues(typeof(ButtonColor));
+        return colors[UnityEngine.Random.Range(0, gameButtons)];
     }
 
     public void ButtonPressed(ButtonColor color)
     {
-        Debug.Log($"Button with color {color} pressed");
-
         if (playersTurn && roundColorsTurnCheck.Count > 0)
         {
             if (roundColorsTurnCheck.Peek() == color)
@@ -137,8 +161,7 @@ public class StartGame : MonoBehaviour
         else
         {
             Debug.Log("Wait for your turn - cant press button while sequence is running");
-        }
-        
+        }   
     }
 
     private IEnumerator StartRoundWithDelay()
@@ -156,13 +179,13 @@ public class StartGame : MonoBehaviour
 
     private void AssignDifficultyParameters()
     {
-        GameDifficulty gamediff = configReaderScript.gameDifficulties.GetDifficulty()[configReaderScript.difficultyChoosen];
+        GameDifficulty gamediff = configReaderScript.gameDifficulties.Difficulty[configReaderScript.difficultyChoosen];
 
-        gameButtons = gamediff.GetGameButtons();
-        pointPerRound = gamediff.GetPointsEachStep();        //done
-        gameTime = gamediff.GetGameTime();                   //done
-        reaperMode = gamediff.GetRepeatMode();
-        gameSpeed = gamediff.GetGameSpeed();
+        gameButtons = gamediff.GameButtons;             
+        pointPerRound = gamediff.PointsEachStep;       
+        gameTime = gamediff.GameTime;                   
+        reaperMode = gamediff.RepeatMode;               
+        gameSpeed = gamediff.GameSpeed;
     }
 
     public int GameButtons

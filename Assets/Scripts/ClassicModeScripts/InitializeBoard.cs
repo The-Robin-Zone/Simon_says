@@ -9,12 +9,15 @@ public class InitializeBoard : MonoBehaviour
     private int numberOfButtons;
     private GameObject mainCanvas;
 
-    void Start()
+    void Awake()
     {
         startGameScript = this.gameObject.GetComponent<StartGame>();
-        numberOfButtons = startGameScript.GameButtons;
         mainCanvas = this.gameObject.transform.parent.gameObject;
+    }
 
+    private void Start()
+    {
+        numberOfButtons = startGameScript.GameButtons;
         BoardInit();
     }
 
@@ -23,7 +26,6 @@ public class InitializeBoard : MonoBehaviour
         for (int i = 0; i < numberOfButtons; i++)
         {
             GameObject childObject = Instantiate(simonButtons[i]);
-            //childObject.transform.parent = mainCanvas.transform;
             childObject.transform.SetParent(mainCanvas.transform, false);
         }
     }
