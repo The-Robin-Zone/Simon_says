@@ -1,0 +1,28 @@
+{
+    "Difficulty": [
+        {
+            "Mode": "Easy",
+            "gameButtons": 4,
+            "pointsEachStep": 1,
+            "gameTime": 50,
+            "repeatMode": true,
+            "gameSpeed": 1
+        },
+        {
+            "Mode": "Medium",
+            "gameButtons": 5,
+            "pointsEachStep": 2,
+            "gameTime": 45,
+            "repeatMode": true,
+            "gameSpeed": 1.25
+        },
+        {
+            "Mode": "Hard",
+            "gameButtons": 6,
+            "pointsEachStep": 3,
+            "gameTime": 30,
+            "repeatMode": false,
+            "gameSpeed": 1.5
+        }
+    ]
+}

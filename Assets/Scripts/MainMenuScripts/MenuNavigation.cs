@@ -7,18 +7,26 @@ using UnityEngine.UI;
 public class MenuNavigation : MonoBehaviour
 {
     [SerializeField] GameObject mainMenuButtons;
-    [SerializeField] GameObject difficultyButtons;
+    [SerializeField] GameObject classicDifficultyButtons;
+    [SerializeField] GameObject hardcoreDifficultyButtons;
     [SerializeField] GameObject settingsMenuButtons;
 
-    public void ShowDifficultyButtons()
+    public void ShowClassicDifficultyButtons()
     {
         mainMenuButtons.SetActive(false);
-        difficultyButtons.SetActive(true);
+        classicDifficultyButtons.SetActive(true);
+    }
+
+    public void ShowHardcoreDifficultyButtons()
+    {
+        mainMenuButtons.SetActive(false);
+        hardcoreDifficultyButtons.SetActive(true);
     }
 
     public void ShowMainMenuButtons()
     {
-        difficultyButtons.SetActive(false);
+        hardcoreDifficultyButtons.SetActive(false);
+        classicDifficultyButtons.SetActive(false);
         mainMenuButtons.SetActive(true); 
     }
 
