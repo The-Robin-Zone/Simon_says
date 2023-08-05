@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 66732554}
   - component: {fileID: 66732553}
   - component: {fileID: 66732552}
-  - component: {fileID: 66732551}
+  - component: {fileID: 66732555}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -164,19 +164,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -806}
   m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &66732551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 66732549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9609d82df14664eb592abe8283429b0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enterNameWindow: {fileID: 2981696873517151993}
 --- !u!114 &66732552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,8 +208,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 66732551}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+      - m_Target: {fileID: 66732555}
+        m_TargetAssemblyTypeName: OpeningSceneNav, Assembly-CSharp
         m_MethodName: ShowEnetNameWindow
         m_Mode: 1
         m_Arguments:
@@ -271,6 +258,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66732549}
   m_CullTransparentMesh: 1
+--- !u!114 &66732555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66732549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e858c7c1798747a097ac8aecc487b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterNameWindow: {fileID: 2981696873517151993}
+  inputFieldObj: {fileID: 1437678103}
 --- !u!1001 &139918776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321,6 +322,10 @@ PrefabInstance:
     - target: {fileID: 8861583185220516080, guid: 8c9c97ead511e4f829eb902120adce6e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8861583185220516081, guid: 8c9c97ead511e4f829eb902120adce6e, type: 3}
+      propertyPath: readFromJSON
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8861583185220516094, guid: 8c9c97ead511e4f829eb902120adce6e, type: 3}
       propertyPath: m_Name
@@ -1740,8 +1745,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2981696873953459995}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+      - m_Target: {fileID: 2981696873953459998}
+        m_TargetAssemblyTypeName: OpeningSceneNav, Assembly-CSharp
         m_MethodName: SendName
         m_Mode: 1
         m_Arguments:
@@ -1752,19 +1757,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2981696873953459995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2981696873953459997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9609d82df14664eb592abe8283429b0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enterNameWindow: {fileID: 0}
 --- !u!224 &2981696873953459996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1798,7 +1790,7 @@ GameObject:
   - component: {fileID: 2981696873953459992}
   - component: {fileID: 2981696873953459993}
   - component: {fileID: 2981696873953459994}
-  - component: {fileID: 2981696873953459995}
+  - component: {fileID: 2981696873953459998}
   m_Layer: 0
   m_Name: Button - continue
   m_TagString: Untagged
@@ -1806,6 +1798,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2981696873953459998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2981696873953459997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e858c7c1798747a097ac8aecc487b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterNameWindow: {fileID: 2981696873517151993}
+  inputFieldObj: {fileID: 1437678103}
 --- !u!224 &2981696874134499616
 RectTransform:
   m_ObjectHideFlags: 0

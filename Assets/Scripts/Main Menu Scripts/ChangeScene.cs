@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,8 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    [SerializeField] GameObject enterNameWindow;
-    [SerializeField] TextMeshPro inputField;
     private GameObject configReader;
     private ConfigReader configReaderScript;
 
@@ -38,16 +37,5 @@ public class ChangeScene : MonoBehaviour
     {
         configReaderScript.difficultyChoosen = difficulty;
         SceneManager.LoadScene("3 - HardcoreMode");
-    }
-
-    public void ShowEnetNameWindow()
-    {
-        enterNameWindow.SetActive(true);
-    }
-
-    public void SendName()
-    {
-        configReaderScript.playerName = "Shaked";
-        LoadHomeScene();
     }
 }

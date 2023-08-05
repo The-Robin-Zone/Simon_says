@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class StartGame : MonoBehaviour
 {
@@ -38,6 +39,10 @@ public class StartGame : MonoBehaviour
     private float timeRemaining;
     private bool roundStarted = false;
 
+    // LeaderBoard
+    [SerializeField] GameObject LeaderboardObj;
+    private Leaderboard leaderboardScript;
+
     void Awake()
     {
         configReader = GameObject.FindGameObjectWithTag("ConfigReader");
@@ -47,6 +52,7 @@ public class StartGame : MonoBehaviour
         roundColorsTurnCheck = new Queue<ButtonColor>();
         timerMeter = timerMeterObj.GetComponent<Image>();
         PointsText = PointsObj.GetComponent<TextMeshProUGUI>();
+        leaderboardScript = LeaderboardObj.GetComponent<Leaderboard>();
         
         AssignDifficultyParameters();
         timeRemaining = gameTime;
@@ -175,6 +181,7 @@ public class StartGame : MonoBehaviour
         StopAllCoroutines();
         buttonpresser.ButtonsDisabler();
         gameOverMenuObj.SetActive(true);
+        leaderboardScript.SetLeaderboardEnty(configReaderScript.playerName, currentPoints);
     }
 
     private void AssignDifficultyParameters()
