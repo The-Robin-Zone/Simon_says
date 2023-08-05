@@ -17,4 +17,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/3 - HardcoreMode.unity
     guid: df9493b18d1cd43af8d8f29f7e029977
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 3cee0321003c849f199681688aba891b, type: 2}
