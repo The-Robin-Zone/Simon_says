@@ -91,6 +91,9 @@ public class StartGame : MonoBehaviour
     {
         roundStarted = true;
 
+        // After player starts game disable button
+        this.gameObject.GetComponent<Button>().interactable = false;
+
         if (!initButtonPresser)
         {
             buttonpresser.ButtonPresserInit();

@@ -47,7 +47,7 @@ public class SwitchToggle : MonoBehaviour
             uiHandleReactTransform.anchoredPosition = handlePosition;
         }
 
-        backgroundImage.color = on ? Color.black : handleDefaultColor;
+        backgroundImage.color = on ? Color.grey : handleDefaultColor;
     }
 
     void OnDestroy()
