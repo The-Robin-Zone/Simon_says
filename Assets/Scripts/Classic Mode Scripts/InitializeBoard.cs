@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InitializeBoard : MonoBehaviour
@@ -10,7 +7,7 @@ public class InitializeBoard : MonoBehaviour
     private StartGame startGameScript;
     private int numberOfButtons;
     private Vector2[] buttonLayout;
-    private static System.Random rng = new System.Random();
+    private static System.Random rnd;
 
     void Awake()
     {
@@ -24,6 +21,9 @@ public class InitializeBoard : MonoBehaviour
         BoardInit();
     }
 
+    /// <summary>
+    /// This method instantiates the Simon buttons prefabs and sets thier position.
+    /// </summary>
     public void BoardInit()
     {
         for (int i = 0; i < numberOfButtons; i++)
@@ -35,6 +35,9 @@ public class InitializeBoard : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method shuffles the Simon buttons position.
+    /// </summary>
     public void BoardShuffle()
     {
         ShuffleCoordinatesVector();
@@ -44,6 +47,26 @@ public class InitializeBoard : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method shuffles the coordinates vector2 array.
+    /// </summary>
+    public void ShuffleCoordinatesVector()
+    {
+        rnd = new System.Random();
+        int n = buttonLayout.Length;
+        while (n > 1)
+        {
+            n--;
+            int k = rnd.Next(n + 1);
+            Vector2 value = buttonLayout[k];
+            buttonLayout[k] = buttonLayout[n];
+            buttonLayout[n] = value;
+        }
+    }
+
+    /// <summary>
+    /// This method assigns the buttons locations (Vector2)array (hard-coded). 
+    /// </summary>
     private void SetButtonCorrdinates()
     {
         switch (numberOfButtons)
@@ -78,19 +101,6 @@ public class InitializeBoard : MonoBehaviour
                                                 new Vector2(250, 0),
                                                 new Vector2(-250, 0)};
                 break;
-        }
-    }
-
-    public void ShuffleCoordinatesVector()
-    {
-        int n = buttonLayout.Length;
-        while (n > 1)
-        {
-            n--;
-            int k = rng.Next(n + 1);
-            Vector2 value = buttonLayout[k];
-            buttonLayout[k] = buttonLayout[n];
-            buttonLayout[n] = value;
         }
     }
 }

@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SimonButton : MonoBehaviour
 {
-    public delegate void ButtonPressHandler(ButtonColor color);
-    public event ButtonPressHandler OnButtonPress;
-
     [SerializeField] AudioSource buttonAudio;
-    [SerializeField] ButtonColor buttonColor;
-
+    [SerializeField] eButtonColor buttonColor;
     private GameObject musicPlayerObj;
     private MusicPlayer musicPlayerScript;
+    public delegate void ButtonPressHandler(eButtonColor color);
+    public event ButtonPressHandler OnButtonPress;
 
     void Start()
     {
@@ -19,11 +15,14 @@ public class SimonButton : MonoBehaviour
         musicPlayerScript = musicPlayerObj.GetComponent<MusicPlayer>();
     }
 
-    public ButtonColor GetColor()
+    public eButtonColor GetColor()
     {
         return buttonColor;
     }
 
+    /// <summary>
+    /// This method plays the Simon buttons sound (used for replaying button sequence). 
+    /// </summary>
     public void ButtonSound()
     {
         if (musicPlayerScript.playBottonSounds)
@@ -32,6 +31,9 @@ public class SimonButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method sends which Simon button the user pressed to the StartGame script & plays buttons sound.
+    /// </summary>
     public void PressButton()
     {
         if (musicPlayerScript.playBottonSounds)

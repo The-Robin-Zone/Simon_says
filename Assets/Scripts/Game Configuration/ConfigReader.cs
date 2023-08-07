@@ -4,8 +4,8 @@ using System.IO;
 
 public class ConfigReader : MonoBehaviour
 {
-    public TextAsset textJSON;
-    public TextAsset textXML;
+    [SerializeField] TextAsset textJSON;
+    [SerializeField] TextAsset textXML;
     public GameDifficultyList gameDifficulties;
     public static ConfigReader Instance { get; private set; }
     public bool readFromJSON;
@@ -13,7 +13,10 @@ public class ConfigReader : MonoBehaviour
     public string playerName;
     public bool hardcoreMode = false;
 
-    void Awake()
+    /// <summary>
+    /// This method makes sure that the object is a singleton.
+    /// </summary>
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -25,10 +28,13 @@ public class ConfigReader : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        LoadData();
+        loadData();
     }
 
-    void LoadData()
+    /// <summary>
+    /// This method loads data from JSON or XML file according to 'readFromJSON' boolean.
+    /// </summary>
+    private void loadData()
     {
         if (readFromJSON)
         {
@@ -44,7 +50,7 @@ public class ConfigReader : MonoBehaviour
             }
         }
 
-        Debug.Log("checking  what was loaded");
+        // Check loaded values
         Debug.Log(gameDifficulties.Difficulty[0].ToString());
         Debug.Log(gameDifficulties.Difficulty[1].ToString());
         Debug.Log(gameDifficulties.Difficulty[2].ToString());

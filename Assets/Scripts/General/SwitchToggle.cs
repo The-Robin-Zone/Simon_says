@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,16 +6,11 @@ public class SwitchToggle : MonoBehaviour
     [SerializeField] RectTransform uiHandleReactTransform;
     [SerializeField] Color backgroundActiveColor;
     [SerializeField] Color handleActiveColor;
-
-    Image backgroundImage;
-    Image handleImage;
-
-    Color backgroundDefaultColor;
-    Color handleDefaultColor;
-
-    Toggle toggle;
-
-    Vector2 handlePosition;
+    private Toggle toggle;
+    private Image backgroundImage;
+    private Image handleImage;
+    private Color handleDefaultColor;
+    private Vector2 handlePosition;
 
     void Awake()
     {
@@ -25,7 +18,6 @@ public class SwitchToggle : MonoBehaviour
         handlePosition = uiHandleReactTransform.anchoredPosition;
         backgroundImage = uiHandleReactTransform.parent.GetComponent<Image>();
         handleImage = uiHandleReactTransform.GetComponent<Image>();
-        backgroundDefaultColor = backgroundImage.color;
         handleDefaultColor = handleImage.color;
         toggle.onValueChanged.AddListener(OnSwitch);
 
@@ -35,10 +27,13 @@ public class SwitchToggle : MonoBehaviour
         }
     }
 
- 
-    void OnSwitch(bool on)
+    /// <summary>
+    /// This method handles the visual effects of the toggle button.
+    /// </summary>
+    /// <param name="i_On">The state of the toggle.</param>
+    void OnSwitch(bool i_On)
     {
-        if (on)
+        if (i_On)
         {
             uiHandleReactTransform.anchoredPosition = handlePosition * (-1);
         }
@@ -47,7 +42,7 @@ public class SwitchToggle : MonoBehaviour
             uiHandleReactTransform.anchoredPosition = handlePosition;
         }
 
-        backgroundImage.color = on ? Color.grey : handleDefaultColor;
+        backgroundImage.color = i_On ? Color.grey : handleDefaultColor;
     }
 
     void OnDestroy()

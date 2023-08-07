@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,6 +22,9 @@ public class OpeningSceneNav : MonoBehaviour
         enterNameWindow.SetActive(true);
     }
 
+    /// <summary>
+    /// This method assigns input string as a 'playerName' in the config script.
+    /// </summary>
     public void SendName()
     {
         if (!string.IsNullOrEmpty(inputField.text) && !string.IsNullOrWhiteSpace(inputField.text))
@@ -36,6 +36,5 @@ public class OpeningSceneNav : MonoBehaviour
         {
             Debug.Log("Enter a valid name");
         }
-
     }
 }

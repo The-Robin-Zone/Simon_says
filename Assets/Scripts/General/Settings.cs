@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +14,6 @@ public class Settings : MonoBehaviour
         musicPlayerObj = GameObject.FindGameObjectWithTag("MusicPlayer");
         musicPlayer = musicPlayerObj.GetComponent<AudioSource>();
         musicPlayerScript = musicPlayerObj.GetComponent<MusicPlayer>();
-        AdjustToggles();
     }
 
     public void SoundOnOff()
@@ -58,27 +55,6 @@ public class Settings : MonoBehaviour
             Debug.Log("Music off");
             musicPlayer.Pause();
             musicPlayerScript.playBackgroundMusic = false;
-        }
-    }
-
-    private void AdjustToggles()
-    {
-        if (musicPlayerScript.playBackgroundMusic == true)
-        {
-
-        }
-        else
-        {
-
-        }
-
-        if (musicPlayerScript.playBottonSounds == true)
-        {
-
-        }
-        else
-        {
-
         }
     }
 }

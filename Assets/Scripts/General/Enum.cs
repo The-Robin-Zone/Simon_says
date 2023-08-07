@@ -1,4 +1,4 @@
-public enum ButtonColor
+public enum eButtonColor
 {
     Red,
     Blue,
