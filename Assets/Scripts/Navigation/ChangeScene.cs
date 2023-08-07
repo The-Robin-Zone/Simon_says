@@ -30,12 +30,13 @@ public class ChangeScene : MonoBehaviour
     public void LoadClassicScene(int difficulty)
     {
         configReaderScript.difficultyChoosen = difficulty;
-        SceneManager.LoadScene("2 - ClassicMode");
+        SceneManager.LoadScene("2 - GameScene");
     }
 
     public void LoadHardcoreScene(int difficulty)
     {
         configReaderScript.difficultyChoosen = difficulty;
-        SceneManager.LoadScene("3 - HardcoreMode");
+        configReaderScript.hardcoreMode = true;
+        SceneManager.LoadScene("2 - GameScene");
     }
 }

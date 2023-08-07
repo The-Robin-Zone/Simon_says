@@ -13,6 +13,7 @@ public class StartGame : MonoBehaviour
 
     private GameObject configReader;
     private ConfigReader configReaderScript;
+    private InitializeBoard initializeBoardScript;
 
     private Queue<ButtonColor> roundColors;
     private Queue<ButtonColor> roundColorsTurnCheck;
@@ -53,7 +54,9 @@ public class StartGame : MonoBehaviour
         timerMeter = timerMeterObj.GetComponent<Image>();
         PointsText = PointsObj.GetComponent<TextMeshProUGUI>();
         leaderboardScript = LeaderboardObj.GetComponent<Leaderboard>();
-        
+        initializeBoardScript = this.gameObject.GetComponent<InitializeBoard>();
+
+
         AssignDifficultyParameters();
         timeRemaining = gameTime;
         pressGapTime = pressGapTime * (1 / gameSpeed);
@@ -159,7 +162,13 @@ public class StartGame : MonoBehaviour
                 {
                     currentPoints = currentPoints + pointPerRound;
                     PointsText.text = currentPoints.ToString();
-                    StartCoroutine(StartRoundWithDelay()); 
+                    StartCoroutine(StartRoundWithDelay());
+
+                    // HARDCORE MODE
+                    if (configReaderScript.hardcoreMode)
+                    {
+                        initializeBoardScript.BoardShuffle();
+                    }
                 }
             }
             else

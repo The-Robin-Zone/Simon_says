@@ -11,6 +11,7 @@ public class ConfigReader : MonoBehaviour
     public bool readFromJSON;
     public int difficultyChoosen;
     public string playerName;
+    public bool hardcoreMode = false;
 
     void Awake()
     {

@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class SimonButton : MonoBehaviour
 {
+    public delegate void ButtonPressHandler(ButtonColor color);
+    public event ButtonPressHandler OnButtonPress;
+
     [SerializeField] AudioSource buttonAudio;
     [SerializeField] ButtonColor buttonColor;
 
-    public delegate void ButtonPressHandler(ButtonColor color);
-    public event ButtonPressHandler OnButtonPress;
+    private GameObject musicPlayerObj;
+    private MusicPlayer musicPlayerScript;
+
+    void Start()
+    {
+        musicPlayerObj = GameObject.FindGameObjectWithTag("MusicPlayer");
+        musicPlayerScript = musicPlayerObj.GetComponent<MusicPlayer>();
+    }
 
     public ButtonColor GetColor()
     {
@@ -17,13 +26,19 @@ public class SimonButton : MonoBehaviour
 
     public void ButtonSound()
     {
-        buttonAudio.Play();
+        if (musicPlayerScript.playBottonSounds)
+        {
+            buttonAudio.Play();
+        }
     }
 
     public void PressButton()
     {
-        buttonAudio.Play();
+        if (musicPlayerScript.playBottonSounds)
+        {
+            buttonAudio.Play();
+        }
+
         OnButtonPress?.Invoke(buttonColor);
     }
-
 }

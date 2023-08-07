@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SimonButton
   - ConfigReader
+  - MusicPlayer
   layers:
   - Default
   - TransparentFX
