@@ -325,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8861583185220516081, guid: 8c9c97ead511e4f829eb902120adce6e, type: 3}
       propertyPath: readFromJSON
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8861583185220516094, guid: 8c9c97ead511e4f829eb902120adce6e, type: 3}
       propertyPath: m_Name
